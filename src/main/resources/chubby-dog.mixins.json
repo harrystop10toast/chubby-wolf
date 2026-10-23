@@ -1,0 +1,20 @@
+{
+	"required": true,
+	"package": "com.example.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"WolfFoodMixin"
+	],
+	"client": [
+		"client.WolfRenderStateMixin",
+		"client.WolfRendererMixin",
+		"client.WolfModelMixin",
+		"client.PlayerModelMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

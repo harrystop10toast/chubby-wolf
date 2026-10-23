@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "chubby-dog",
+	"version": "${version}",
+	"name": "Chubby Dog",
+	"description": "Feed cooked beef to wolves, carry your chubby wolf, and throw it.",
+	"authors": [
+		"Chubby Dog"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/chubby-dog/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.example.FatDogs"
+		],
+		"client": [
+			"com.example.client.ChubbyDogClient"
+		]
+	},
+	"mixins": [
+		"chubby-dog.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
