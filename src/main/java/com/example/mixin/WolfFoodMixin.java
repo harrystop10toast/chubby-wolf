@@ -49,10 +49,23 @@ public abstract class WolfFoodMixin {
 		}
 
 		ItemStack stack = player.getItemInHand(hand);
+		boolean steak = stack.is(Items.COOKED_BEEF) && wolf.isFood(stack);
 		boolean canEatNow = !wolf.isTame() || wolf.getHealth() < wolf.getMaxHealth();
-		if (!wolf.level().isClientSide() && !player.isSpectator() && canEatNow
-				&& stack.is(Items.COOKED_BEEF) && wolf.isFood(stack)) {
-			wolf.setAttached(FatDogs.CHUBBY, true);
+		if (!player.isSpectator() && canEatNow && steak) {
+			if (!wolf.level().isClientSide() && !chubby && wolf.getRandom().nextFloat() < 0.05F) {
+				wolf.setAttached(FatDogs.CHUBBY, true);
+			}
+
+			if (!wolf.isTame()) {
+				if (!wolf.level().isClientSide()) {
+					stack.consume(1, player);
+					wolf.heal(2.0F);
+					if (wolf.getAttachedOrElse(FatDogs.CHUBBY, false)) {
+						FatDogs.promoteToChubbyDog(wolf);
+					}
+				}
+				cir.setReturnValue(InteractionResult.SUCCESS);
+			}
 		}
 	}
 

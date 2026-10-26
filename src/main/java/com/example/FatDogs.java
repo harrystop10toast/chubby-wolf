@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.entity.ChubbyDog;
+import com.example.mixin.WolfVariantAccessor;
 import com.example.network.ThrowWolfPayload;
 import com.mojang.serialization.Codec;
 import net.fabricmc.api.ModInitializer;
@@ -120,7 +121,12 @@ public class FatDogs implements ModInitializer {
 		}
 
 		return wolf.convertTo(CHUBBY_DOG, ConversionParams.single(wolf, true, true),
-				EntitySpawnReason.CONVERSION, chubbyDog -> chubbyDog.setAttached(CHUBBY, true));
+				EntitySpawnReason.CONVERSION, chubbyDog -> {
+					((WolfVariantAccessor) chubbyDog).chubbyDog$setVariant(
+							((WolfVariantAccessor) wolf).chubbyDog$getVariant());
+					chubbyDog.setAttached(CHUBBY, true);
+					chubbyDog.applyChubbyAttributes();
+				});
 	}
 
 	public static Identifier id(String path) {

@@ -2,6 +2,8 @@ package com.example.entity;
 
 import com.example.FatDogs;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -14,6 +16,20 @@ public class ChubbyDog extends Wolf {
 
 	public ChubbyDog(EntityType<? extends Wolf> entityType, Level level) {
 		super(entityType, level);
+		setAttached(FatDogs.CHUBBY, true);
+		applyChubbyAttributes();
+	}
+
+	public void applyChubbyAttributes() {
+		getAttribute(Attributes.MAX_HEALTH).addOrReplacePermanentModifier(
+				new AttributeModifier(FatDogs.id("chubby_health"), 2.0,
+						AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+		getAttribute(Attributes.MOVEMENT_SPEED).addOrReplacePermanentModifier(
+				new AttributeModifier(FatDogs.id("chubby_speed"), -0.25,
+						AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+		getAttribute(Attributes.ATTACK_DAMAGE).addOrReplacePermanentModifier(
+				new AttributeModifier(FatDogs.id("chubby_damage"), 0.2,
+						AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 	}
 
 	@Override
